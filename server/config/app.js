@@ -10,6 +10,8 @@ let mongoose = require('mongoose');
 // URI
 let DB = require('./db');
 
+
+// point mongoose to the DB URI
 mongoose.connect(process.env.URI || DB.URI, {useNewUrlParser: true, useUnifiedTopology: true});
 
 let mongoDB = mongoose.connection;

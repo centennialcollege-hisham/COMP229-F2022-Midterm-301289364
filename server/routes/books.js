@@ -8,36 +8,46 @@ let book = require('../models/books');
 
 /* GET books List page. READ */
 router.get('/', (req, res, next) => {
-  // find all books in the books collection
-  book.find( (err, books) => {
-    if (err) {
-      return console.error(err);
-    }
-    else {
-      res.render('books/index', {
-        title: 'Books',
-        books: books
-      });
-    }
-  });
+    // find all books in the books collection
+    book.find((err, books) => {
+        if (err) {
+            return console.error(err);
+        } else {
+            res.render('books/index', {
+                title: 'Books',
+                books: books
+            });
+        }
+    });
 
 });
 
 //  GET the Book Details page in order to add a new Book
 router.get('/add', (req, res, next) => {
-
-    /*****************
-     * ADD CODE HERE *
-     *****************/
-
+    res.render('books/details', {title: 'Add Book'})
 });
 
 // POST process the Book Details page and create a new Book - CREATE
 router.post('/add', (req, res, next) => {
 
-    /*****************
-     * ADD CODE HERE *
-     *****************/
+    let newBook = book({
+        "title": req.body.title,
+        "description": req.body.description,
+        "price": req.body.price,
+        "author": req.body.author,
+        "genre": req.body.genre
+    });
+
+
+    book.create(newBook, (err, Book) => {
+        if (err) {
+            console.log(err);
+            res.end(err);
+        } else {
+            // refresh the book list
+            res.redirect('/books');
+        }
+    });
 
 });
 
