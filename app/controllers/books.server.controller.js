@@ -1,13 +1,13 @@
 // modules required for routing
 let express = require('express');
-let router = express.Router();
 let mongoose = require('mongoose');
 
 // define the book model
 let book = require('../models/books');
 
 /* GET books List page. READ */
-router.get('/', (req, res, next) => {
+
+module.exports.displayBookList = (req, res) => {
     // find all books in the books collection
     book.find((err, books) => {
         if (err) {
@@ -19,16 +19,15 @@ router.get('/', (req, res, next) => {
             });
         }
     });
+}
 
-});
+//showing add page
+module.exports.displayAddPage = (req, res) => {
+    res.render('books/add', {title: 'Add Book'})
+}
 
-//  GET the Book Details page in order to add a new Book
-router.get('/add', (req, res, next) => {
-    res.render('books/details', {title: 'Add Book'})
-});
-
-// POST process the Book Details page and create a new Book - CREATE
-router.post('/add', (req, res, next) => {
+//processing the add page using module exports
+module.exports.processAddPage = (req, res) => {
 
     let newBook = book({
         "title": req.body.title,
@@ -39,7 +38,7 @@ router.post('/add', (req, res, next) => {
     });
 
 
-    book.create(newBook, (err, Book) => {
+    book.create(newBook, (err) => {
         if (err) {
             console.log(err);
             res.end(err);
@@ -48,10 +47,10 @@ router.post('/add', (req, res, next) => {
         }
     });
 
-});
+}
 
-// GET the Book Details page in order to edit an existing Book
-router.get('/edit/:id', (req, res, next) => {
+//showing edit page using module exports
+module.exports.displayEditPage = (req, res) => {
 
     let id = req.params.id;
 
@@ -65,10 +64,10 @@ router.get('/edit/:id', (req, res, next) => {
         }
     });
 
-});
+}
 
-// POST - process the information passed from the details form and update the document
-router.post('/edit/:id', (req, res, next) => {
+//processing the edit book
+module.exports.processEditPage = (req, res) => {
 
     let id = req.params.id
 
@@ -90,10 +89,10 @@ router.post('/edit/:id', (req, res, next) => {
         }
     });
 
-});
+}
 
-// GET - process the delete by user id
-router.get('/delete/:id', (req, res, next) => {
+//performing the deletion of book
+module.exports.performDeleteBook = (req, res) => {
     let id = req.params.id;
 
     book.remove({_id: id}, (err) => {
@@ -104,7 +103,4 @@ router.get('/delete/:id', (req, res, next) => {
             res.redirect('/books');
         }
     });
-});
-
-
-module.exports = router;
+}
