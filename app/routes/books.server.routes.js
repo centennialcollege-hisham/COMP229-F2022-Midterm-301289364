@@ -1,10 +1,16 @@
+
+// File Name - books.server.routes.js
+// Student Name - Hisham Abu Sanimeh
+// Student ID - 301289364
+// App Name - Comp229 - Midterm
+// Date - 23-06-2022
+
 // modules required for routing
 let express = require('express');
 let router = express.Router();
 
 // Connect to books Controller
 const booksController = require('../controllers/books.server.controller')
-
 
 /* GET books List page. READ */
 router.get('/', booksController.displayBookList);

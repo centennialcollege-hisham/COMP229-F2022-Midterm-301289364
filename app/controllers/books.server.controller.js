@@ -1,6 +1,8 @@
-// modules required for routing
-let express = require('express');
-let mongoose = require('mongoose');
+// File Name - books.server.controller.js
+// Student Name - Hisham Abu Sanimeh
+// Student ID - 301289364
+// App Name - Comp229 - Midterm
+// Date - 23-06-2022
 
 // define the book model
 let book = require('../models/books');

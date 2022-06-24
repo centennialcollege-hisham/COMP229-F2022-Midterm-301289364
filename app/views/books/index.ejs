@@ -1,3 +1,4 @@
+
 <% include ../partials/header.ejs %>
 
 <!-- MAIN CONTENT -->
@@ -5,9 +6,7 @@
     <div class="row">
         <div class="col-md-offset-1 col-md-10">
             <h3>Favourite Books List </h3>
-            <!-- ------------------------ -->
-            <!-- FIX THE ADD BUTTON BELOW -->
-            <!-- ------------------------ -->
+<!--      Add Button -->
             <a href="/books/add" class="btn btn-primary"><i class="fa fa-plus"></i> Add a book</a>
             <br> <br>
             <div class="table-responsive">
@@ -23,7 +22,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <!-- Template Row -->
+                    <!--For loop to display all books  -->
                     <% for(let count = 0; count < books.length; count++) { %>
                         <tr>
                             <td><%= books[count].title %></td>
